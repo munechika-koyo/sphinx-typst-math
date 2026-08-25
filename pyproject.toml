@@ -27,6 +27,10 @@ dependencies = [
   "typst>=0.15",
 ]
 
+[project.urls]
+Repository = "https://github.com/munechika-koyo/sphinx-typst-math"
+Issues = "https://github.com/munechika-koyo/sphinx-typst-math/issues"
+
 [project.optional-dependencies]
 test = [
   "myst-parser>=4,<5",
