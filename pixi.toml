@@ -1,0 +1,18 @@
+[workspace]
+name = "sphinx-typst-math"
+channels = ["conda-forge"]
+platforms = ["osx-arm64", "linux-64"]
+
+[dependencies]
+python = ">=3.10,<3.14"
+pandoc = ">=3,<4"
+
+[pypi-dependencies]
+sphinx-typst-math = { path = ".", editable = true, extras = ["dev"] }
+
+[tasks]
+test = "pytest"
+lint = "ruff check ."
+format-check = "ruff format --check ."
+typecheck = "mypy"
+check = { depends-on = ["lint", "format-check", "typecheck", "test"] }

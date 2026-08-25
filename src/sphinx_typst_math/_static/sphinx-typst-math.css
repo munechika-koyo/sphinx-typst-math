@@ -1,0 +1,96 @@
+/* MathML support rules emitted by the Typst 0.15 HTML exporter. */
+
+/* Alignment */
+.typst-math mtable.right-align mtd,
+.typst-math mtable mtd.right-align,
+.typst-math mtable.left-align mtd.right-align,
+.typst-math mtable.aligned mtd:nth-child(odd) {
+  justify-items: end;
+  text-align: right;
+}
+
+.typst-math mtable.cases mtd,
+.typst-math mtable.left-align mtd,
+.typst-math mtable mtd.left-align,
+.typst-math mtable.aligned mtd:nth-child(even),
+.typst-math math:is(:not([display])) > mtable.multiline-equation mtd {
+  justify-items: start;
+  text-align: left;
+}
+
+.typst-math mtable.cases mtd,
+.typst-math mtable.aligned mtd,
+.typst-math mtable mtd.flushed,
+.typst-math mtable mtd.left-flush {
+  padding-left: 0;
+}
+
+.typst-math mtable.cases mtd,
+.typst-math mtable.aligned mtd,
+.typst-math mtable mtd.flushed,
+.typst-math mtable mtd.right-flush {
+  padding-right: 0;
+}
+
+/* Tables */
+.typst-math mtable {
+  math-style: inherit;
+}
+
+.typst-math mtd {
+  math-depth: auto-add;
+  math-style: compact;
+  math-shift: compact;
+}
+
+/* Equations */
+.typst-math mtable.multiline-equation mtd {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+  padding: 0;
+}
+
+.typst-math math > mtable.multiline-equation mtr:not(:last-child) mtd {
+  padding-bottom: 0.5em;
+}
+
+/* Fractions */
+.typst-math mfrac {
+  padding-inline: 0;
+  margin-inline: 0.1em;
+}
+
+/* Accents */
+.typst-math mover[accent="true" i] > :first-child {
+  font-feature-settings: "dtls";
+}
+
+.typst-math mover.dotted[accent="true" i] > :first-child {
+  font-feature-settings: "dtls" 0;
+}
+
+/* Script level, display style, and math shift */
+.typst-math munder > :nth-child(2),
+.typst-math munderover > :nth-child(2) {
+  math-shift: compact;
+}
+
+.typst-math munder[accentunder="true" i] > :not(:first-child),
+.typst-math mover[accent="true" i] > :not(:first-child) {
+  math-depth: inherit;
+  math-style: inherit;
+  math-shift: inherit;
+}
+
+/* Keep large equations usable without imposing colors or backgrounds. */
+.typst-math-display > math[display="block"] {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.typst-math-error {
+  color: inherit;
+  text-decoration: underline wavy currentcolor;
+}

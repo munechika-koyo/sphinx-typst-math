@@ -1,0 +1,68 @@
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+[project]
+name = "sphinx-typst-math"
+version = "0.1.0"
+description = "Render native Typst math as MathML in Sphinx HTML builds"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [{ name = "sphinx-typst-math contributors" }]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Framework :: Sphinx :: Extension",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Documentation :: Sphinx",
+]
+dependencies = [
+  "Sphinx>=8.2,<10",
+  "packaging>=23",
+  "typst>=0.15",
+]
+
+[project.optional-dependencies]
+test = [
+  "myst-parser>=4,<5",
+  "nbsphinx>=0.9.7,<1",
+  "pytest>=8,<9",
+  "sphinx-immaterial>=0.13,<1",
+]
+dev = [
+  "build>=1.2,<2",
+  "mypy>=1.15,<2",
+  "ruff>=0.12,<1",
+  "sphinx-typst-math[test]",
+  "types-docutils>=0.21",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/sphinx_typst_math"]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
+markers = [
+  "integration: builds a real Sphinx documentation project",
+]
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+extend-exclude = [".pixi", "outputs", "work"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
+
+[tool.mypy]
+python_version = "3.10"
+files = ["src/sphinx_typst_math"]
+check_untyped_defs = true
+disallow_untyped_defs = true
+warn_unused_ignores = true
