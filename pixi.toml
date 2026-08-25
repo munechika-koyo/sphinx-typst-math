@@ -41,9 +41,6 @@ myst-parser = ">=4,<6"
 nbsphinx = ">=0.9.7,<1"
 sphinx-immaterial = ">=0.13,<1"
 
-# For building and packaging
-python-build = "*"
-
 # For linting and formatting
 lefthook = "*"
 dprint = "*"
@@ -72,9 +69,17 @@ blacken-docs = { cmd = "blacken-docs", description = "Format Python markdown blo
 validate-pyproject = { cmd = "validate-pyproject pyproject.toml", description = "Validate pyproject.toml" }
 lint = { cmd = "lefthook run pre-commit --all-files --force", description = "🧹 Run all linters" }
 
-# Build and packaging tasks
-build = { cmd = "python -m build", description = "📦 Build the package" }
+# === Build feature ===
+[feature.build.dev]
+sphinx-typst-math = { path = "." }
 
+[feature.build.dependencies]
+python-build = "*"
+
+[feature.build.tasks]
+build = { cmd = "python -m build -nx", description = "📦 Build the package" }
+
+# === Python environment features ===
 [feature.py311.dependencies]
 python = "3.11.*"
 
@@ -88,8 +93,9 @@ python = "3.13.*"
 python = "3.14.*"
 
 [environments]
-default = ["py313"]
+default = ["py314"]
 py311 = ["py311"]
 py312 = ["py312"]
 py313 = ["py313"]
 py314 = ["py314"]
+build = { features = ["build"], no-default-feature = true }
