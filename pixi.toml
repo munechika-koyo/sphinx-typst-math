@@ -2,13 +2,22 @@
 name = "sphinx-typst-math"
 channels = ["conda-forge"]
 platforms = ["osx-arm64", "linux-64"]
+preview = ["pixi-build"]
 
 [dependencies]
 python = ">=3.11,<3.15"
 pandoc = ">=3,<4"
+sphinx-typst-math = { path = "." }
 
 [pypi-dependencies]
-sphinx-typst-math = { path = ".", editable = true, extras = ["dev"] }
+build = ">=1.2,<2"
+myst-parser = ">=4,<6"
+mypy = ">=1.15,<2"
+nbsphinx = ">=0.9.7,<1"
+pytest = ">=8,<9"
+ruff = ">=0.12,<1"
+sphinx-immaterial = ">=0.13,<1"
+types-docutils = ">=0.21"
 
 [tasks]
 test = "pytest"
@@ -16,3 +25,33 @@ lint = "ruff check ."
 format-check = "ruff format --check ."
 typecheck = "mypy"
 check = { depends-on = ["lint", "format-check", "typecheck", "test"] }
+build = "python -m build"
+
+[feature.py311.dependencies]
+python = "3.11.*"
+
+[feature.py312.dependencies]
+python = "3.12.*"
+
+[feature.py313.dependencies]
+python = "3.13.*"
+
+[feature.py314.dependencies]
+python = "3.14.*"
+
+[environments]
+default = ["py313"]
+py311 = ["py311"]
+py312 = ["py312"]
+py313 = ["py313"]
+py314 = ["py314"]
+
+[package]
+name = "sphinx-typst-math"
+version = "0.1.0"
+
+[package.build]
+backend = { name = "pixi-build-python", version = "0.*", channels = ["https://prefix.dev/conda-forge"] }
+
+[package.build.config]
+ignore-pypi-mapping = false

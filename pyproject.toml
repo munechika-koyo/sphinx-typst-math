@@ -31,21 +31,6 @@ dependencies = [
 Repository = "https://github.com/munechika-koyo/sphinx-typst-math"
 Issues = "https://github.com/munechika-koyo/sphinx-typst-math/issues"
 
-[project.optional-dependencies]
-test = [
-  "myst-parser>=4,<5",
-  "nbsphinx>=0.9.7,<1",
-  "pytest>=8,<9",
-  "sphinx-immaterial>=0.13,<1",
-]
-dev = [
-  "build>=1.2,<2",
-  "mypy>=1.15,<2",
-  "ruff>=0.12,<1",
-  "sphinx-typst-math[test]",
-  "types-docutils>=0.21",
-]
-
 [tool.hatch.build.targets.wheel]
 packages = ["src/sphinx_typst_math"]
 
@@ -70,3 +55,7 @@ files = ["src/sphinx_typst_math"]
 check_untyped_defs = true
 disallow_untyped_defs = true
 warn_unused_ignores = true
+
+[[tool.mypy.overrides]]
+module = ["sphinx.*"]
+follow_imports = "skip"

@@ -150,7 +150,15 @@ Pandoc (needed by nbsphinx tests):
 ```bash
 pixi install
 pixi run check
+pixi run build
+pixi build --output-dir dist/conda
 ```
 
+The `check` task runs linting, formatting checks, type checking, and the full
+test suite. Python 3.11 through 3.14 are available as the `py311`, `py312`,
+`py313`, and `py314` Pixi environments; for example, run
+`pixi run --environment py314 test`. The `build` task creates the wheel and
+source distribution, while `pixi build` creates a Conda package.
+
 The test suite compiles real Typst equations and builds real MyST, nbsphinx,
-and sphinx-immaterial projects.
+and sphinx-immaterial projects. CI invokes the same Pixi tasks used locally.
