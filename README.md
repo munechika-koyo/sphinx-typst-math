@@ -102,6 +102,7 @@ The primary workflow is MyST Markdown. With MyST Parser and the `dollarmath`
 extension enabled as shown in the quick start, append a label in parentheses
 to a display-math block and reference it with MyST's `{eq}` role:
 
+<!-- dprint-ignore -->
 ```markdown
 $$
 E = m c^2
@@ -144,21 +145,28 @@ default.
 
 ## Development
 
-The repository includes a Pixi environment with Python dependencies and
-Pandoc (needed by nbsphinx tests):
+The repository includes Pixi environments for development, testing, and
+package builds. The default environment uses Python 3.14.
 
 ```bash
 pixi install
-pixi run check
+pixi run lint
+pixi run test
 pixi run build
 pixi build --output-dir dist/conda
 ```
 
-The `check` task runs linting, formatting checks, type checking, and the full
-test suite. Python 3.11 through 3.14 are available as the `py311`, `py312`,
-`py313`, and `py314` Pixi environments; for example, run
-`pixi run --environment py314 test`. The `build` task creates the wheel and
-source distribution, while `pixi build` creates a Conda package.
+The `lint` task runs all configured pre-commit checks, and the `test` task runs
+the full pytest suite. Python 3.11 through 3.14 are available as the `py311`,
+`py312`, `py313`, and `py314` environments; for example:
+
+```bash
+pixi run --environment py311 test
+```
+
+The `build` task runs in its dedicated Pixi environment and creates the wheel
+and source distribution. `pixi build` uses the Pixi build backend to create a
+Conda package.
 
 The test suite compiles real Typst equations and builds real MyST, nbsphinx,
 and sphinx-immaterial projects. CI invokes the same Pixi tasks used locally.
