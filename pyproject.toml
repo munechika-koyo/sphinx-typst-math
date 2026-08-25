@@ -1,15 +1,12 @@
-[build-system]
-requires = ["hatchling>=1.26"]
-build-backend = "hatchling.build"
-
 [project]
 name = "sphinx-typst-math"
-version = "0.1.0"
 description = "Render native Typst math as MathML in Sphinx HTML builds"
 readme = "README.md"
 requires-python = ">=3.11"
 license = "MIT"
-authors = [{ name = "sphinx-typst-math contributors" }]
+authors = [
+  { name = "munechika-koyo", email = "munechika.koyo@gmail.com" },
+]
 classifiers = [
   "Development Status :: 3 - Alpha",
   "Framework :: Sphinx :: Extension",
@@ -26,36 +23,53 @@ dependencies = [
   "packaging>=23",
   "typst>=0.15",
 ]
+dynamic = ["version"]
 
 [project.urls]
-Repository = "https://github.com/munechika-koyo/sphinx-typst-math"
 Issues = "https://github.com/munechika-koyo/sphinx-typst-math/issues"
+Repository = "https://github.com/munechika-koyo/sphinx-typst-math"
 
+[build-system]
+requires = ["hatch-vcs", "hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+# -------------------------------
+# === Packaging Configuration ===
+# -------------------------------
 [tool.hatch.build.targets.wheel]
 packages = ["src/sphinx_typst_math"]
 
+# ----------------------
+# === Version config ===
+# ----------------------
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.metadata.hooks.vcs]
+
+# ------------------------------
+# === Type checking settings ===
+# ------------------------------
+[tool.pyrefly]
+project-includes = ["src"]
+
+# ------------------------
+# === Testing settings ===
+# ------------------------
+
 [tool.pytest.ini_options]
 addopts = "-ra"
-testpaths = ["tests"]
 markers = [
   "integration: builds a real Sphinx documentation project",
 ]
+testpaths = ["tests"]
 
+# ------------------------------
+# === Lint & Format settings ===
+# ------------------------------
 [tool.ruff]
 line-length = 88
-target-version = "py311"
 extend-exclude = [".pixi", "outputs", "work"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
-
-[tool.mypy]
-python_version = "3.11"
-files = ["src/sphinx_typst_math"]
-check_untyped_defs = true
-disallow_untyped_defs = true
-warn_unused_ignores = true
-
-[[tool.mypy.overrides]]
-module = ["sphinx.*"]
-follow_imports = "skip"
