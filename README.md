@@ -98,18 +98,22 @@ build inputs.
 
 ## Equation numbers and references
 
-The renderer retains the IDs and numbering assigned structurally by Sphinx.
-For example, a labeled reStructuredText equation works with Sphinx's normal
-equation role:
+The primary workflow is MyST Markdown. With MyST Parser and the `dollarmath`
+extension enabled as shown in the quick start, append a label in parentheses
+to a display-math block and reference it with MyST's `{eq}` role:
 
-```rst
-.. math::
-   :label: energy
+```markdown
+$$
+E = m c^2
+$$ (energy)
 
-   E = m c^2
-
-See :eq:`energy`.
+See {eq}`energy`.
 ```
+
+The renderer retains the IDs and numbering assigned structurally by Sphinx,
+so equivalent math nodes produced by reStructuredText or integrations such as
+nbsphinx remain compatible even though MyST Markdown is the primary documented
+input format.
 
 Typst source is not inspected for LaTeX commands such as `\label`, `\tag`, or
 `\eqref`. Labels must be represented by Sphinx/MyST nodes. In particular,
