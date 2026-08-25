@@ -7,7 +7,7 @@ name = "sphinx-typst-math"
 version = "0.1.0"
 description = "Render native Typst math as MathML in Sphinx HTML builds"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 license = "MIT"
 authors = [{ name = "sphinx-typst-math contributors" }]
 classifiers = [
@@ -15,7 +15,6 @@ classifiers = [
   "Framework :: Sphinx :: Extension",
   "License :: OSI Approved :: MIT License",
   "Programming Language :: Python :: 3",
-  "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
@@ -58,14 +57,14 @@ markers = [
 
 [tool.ruff]
 line-length = 88
-target-version = "py310"
+target-version = "py311"
 extend-exclude = [".pixi", "outputs", "work"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B", "SIM", "RUF"]
 
 [tool.mypy]
-python_version = "3.10"
+python_version = "3.11"
 files = ["src/sphinx_typst_math"]
 check_untyped_defs = true
 disallow_untyped_defs = true
