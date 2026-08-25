@@ -35,7 +35,7 @@ sphinx-typst-math = { path = "." }
 types-docutils = ">=0.21"
 
 # For testing
-pytest = ">=8,<9"
+pytest = ">=9,<10"
 pandoc = ">=3,<4"
 myst-parser = ">=4,<6"
 nbsphinx = ">=0.9.7,<1"
