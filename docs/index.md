@@ -72,6 +72,21 @@ abs(x) = cases(
 $$
 ```
 
+## reStructuredText input
+
+The renderer also handles the standard reStructuredText math role and
+directive. Their contents are still native Typst source:
+
+```{eval-rst}
+.. rst-example:: reStructuredText math
+
+   Inline math uses :math:`sum_(k=1)^n k = (n(n+1))/2`.
+
+   .. math::
+
+      integral_0^infinity e^(-x^2) dif x = sqrt(pi) / 2
+```
+
 ## Equation numbers and references
 
 Attach a MyST label after a display equation. Sphinx owns the number, target,
@@ -84,6 +99,20 @@ $$ (mass-energy)
 
 Equation {eq}`mass-energy` is rendered as native MathML and retains the normal
 Sphinx permalink and reference behavior.
+```
+
+Labels can also be attached to reStructuredText math directives:
+
+```{eval-rst}
+.. rst-example::
+
+   .. math::
+      :label: mass-energy-rst
+
+      E = m c^2
+
+   Equation :eq:`mass-energy-rst` is rendered as native MathML and retains the
+   normal Sphinx permalink and reference behavior.
 ```
 
 ## Shared definitions
