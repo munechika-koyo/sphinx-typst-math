@@ -118,7 +118,15 @@ Labels can also be attached to reStructuredText math directives:
 ## Shared definitions
 
 The demonstration configuration defines an `expectation` helper in
-`typst_math_preamble`. It is available in every Markdown page and notebook:
+`typst_math_preamble` in `conf.py`:
+
+```python
+typst_math_preamble = r"""
+#expectation(X) = integral_(-infinity)^infinity x f(x) dif x
+"""
+```
+
+It is available in every Markdown page and notebook:
 
 ```{myst-example}
 $$
