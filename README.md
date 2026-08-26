@@ -8,6 +8,13 @@ MathML, and places that MathML directly into Sphinx's HTML.
 There is no Typst-to-LaTeX conversion, MathJax runtime, custom math parser, or
 Node.js dependency.
 
+## Documentation and live demo
+
+See the [GitHub Pages demo](https://munechika-koyo.github.io/sphinx-typst-math/)
+for rendered examples using MyST Markdown, reStructuredText, Typst Universe
+packages, and nbsphinx notebooks. The documentation source is available in the
+[`docs/`](docs/) directory.
+
 > [!IMPORTANT]
 > Typst 0.15 introduced HTML equation export. This package therefore requires
 > `typst-py >= 0.15`.
