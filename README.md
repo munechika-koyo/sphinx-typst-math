@@ -152,7 +152,7 @@ default.
 
 ## Development
 
-The repository includes Pixi environments for development, testing, and
+The repository includes Pixi environments for development, documentation, testing, and
 package builds. The default environment uses Python 3.14.
 
 ```bash
@@ -160,6 +160,7 @@ pixi install
 pixi run lint
 pixi run test
 pixi run build
+pixi run doc-build && pixi run doc-serve
 pixi publish --path . --target-dir dist/conda
 ```
 
@@ -172,7 +173,10 @@ pixi run --environment py311 test
 ```
 
 The `build` task runs in its dedicated Pixi environment and creates the wheel
-and source distribution. `pixi publish --path . --target-dir dist/conda` uses
+and source distribution.
+The `doc-build` and `doc-serve` tasks build and serve the Sphinx documentation
+locally.
+`pixi publish --path . --target-dir dist/conda` uses
 the Pixi build backend to create a Conda package in `dist/conda`.
 
 The test suite compiles real Typst equations and builds real MyST, nbsphinx,
