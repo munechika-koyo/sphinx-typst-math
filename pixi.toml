@@ -48,6 +48,7 @@ ruff = "*"
 pyrefly = "*"
 actionlint = "*"
 shellcheck = "*"
+blacken-docs = "*"
 validate-pyproject = "*"
 tombi = "*"
 
