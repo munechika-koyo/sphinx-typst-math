@@ -160,7 +160,7 @@ pixi install
 pixi run lint
 pixi run test
 pixi run build
-pixi build --output-dir dist/conda
+pixi publish --path . --target-dir dist/conda
 ```
 
 The `lint` task runs all configured pre-commit checks, and the `test` task runs
@@ -172,8 +172,8 @@ pixi run --environment py311 test
 ```
 
 The `build` task runs in its dedicated Pixi environment and creates the wheel
-and source distribution. `pixi build` uses the Pixi build backend to create a
-Conda package.
+and source distribution. `pixi publish --path . --target-dir dist/conda` uses
+the Pixi build backend to create a Conda package in `dist/conda`.
 
 The test suite compiles real Typst equations and builds real MyST, nbsphinx,
 and sphinx-immaterial projects. CI invokes the same Pixi tasks used locally.
