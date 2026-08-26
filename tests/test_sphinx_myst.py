@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import re
+from textwrap import dedent
 
 import pytest
 
@@ -9,19 +10,24 @@ import pytest
 def test_myst_inline_and_display_math_are_native_mathml(build_sphinx) -> None:  # type: ignore[no-untyped-def]
     result, output = build_sphinx(
         {
-            "conf.py": """
-extensions = ["myst_parser", "sphinx_typst_math"]
-html_math_renderer = "typst"
-myst_enable_extensions = ["dollarmath"]
-""",
-            "index.md": """# Typst math
+            "conf.py": dedent(
+                """
+                extensions = ["myst_parser", "sphinx_typst_math"]
+                html_math_renderer = "typst"
+                myst_enable_extensions = ["dollarmath"]
+                """
+            ),
+            "index.md": dedent(
+                """\
+                # Typst math
 
-Inline: $sum_(i=1)^n i$
+                Inline: $sum_(i=1)^n i$
 
-$$
-integral_0^1 x^2 dif x
-$$
-""",
+                $$
+                integral_0^1 x^2 dif x
+                $$
+                """
+            ),
         }
     )
 
@@ -46,20 +52,25 @@ $$
 def test_sphinx_equation_number_reference_and_permalink(build_sphinx) -> None:  # type: ignore[no-untyped-def]
     result, output = build_sphinx(
         {
-            "conf.py": """
-extensions = ["sphinx_typst_math"]
-html_math_renderer = "typst"
-""",
-            "index.rst": """Numbered equation
-=================
+            "conf.py": dedent(
+                """
+                extensions = ["sphinx_typst_math"]
+                html_math_renderer = "typst"
+                """
+            ),
+            "index.rst": dedent(
+                """\
+                Numbered equation
+                =================
 
-.. math::
-   :label: energy
+                .. math::
+                   :label: energy
 
-   E = m c^2
+                   E = m c^2
 
-See :eq:`energy`.
-""",
+                See :eq:`energy`.
+                """
+            ),
         }
     )
 
@@ -75,11 +86,13 @@ See :eq:`energy`.
 def test_preamble_is_used_by_sphinx_build(build_sphinx) -> None:  # type: ignore[no-untyped-def]
     result, output = build_sphinx(
         {
-            "conf.py": """
-extensions = ["sphinx_typst_math"]
-html_math_renderer = "typst"
-typst_math_preamble = "#let sq(x) = $x^2$"
-""",
+            "conf.py": dedent(
+                """
+                extensions = ["sphinx_typst_math"]
+                html_math_renderer = "typst"
+                typst_math_preamble = "#let sq(x) = $x^2$"
+                """
+            ),
             "index.rst": "Inline :math:`sq(4)`.",
         }
     )
@@ -92,11 +105,13 @@ typst_math_preamble = "#let sq(x) = $x^2$"
 def test_configured_import_is_used_by_sphinx_build(build_sphinx) -> None:  # type: ignore[no-untyped-def]
     result, output = build_sphinx(
         {
-            "conf.py": """
-extensions = ["sphinx_typst_math"]
-html_math_renderer = "typst"
-typst_math_imports = ["math.typ"]
-""",
+            "conf.py": dedent(
+                """
+                extensions = ["sphinx_typst_math"]
+                html_math_renderer = "typst"
+                typst_math_imports = ["math.typ"]
+                """
+            ),
             "math.typ": "#let sq(x) = $x^2$",
             "index.rst": "Inline :math:`sq(7)`.",
         }

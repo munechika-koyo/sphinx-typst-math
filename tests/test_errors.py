@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from textwrap import dedent
+
 import pytest
 
 
@@ -7,11 +9,13 @@ import pytest
 def test_import_entries_must_be_non_empty_strings(build_sphinx) -> None:  # type: ignore[no-untyped-def]
     result, _ = build_sphinx(
         {
-            "conf.py": """
-extensions = ["sphinx_typst_math"]
-html_math_renderer = "typst"
-typst_math_imports = [""]
-""",
+            "conf.py": dedent(
+                """
+                extensions = ["sphinx_typst_math"]
+                html_math_renderer = "typst"
+                typst_math_imports = [""]
+                """
+            ),
             "index.rst": "Configuration error",
         }
     )
@@ -25,18 +29,23 @@ typst_math_imports = [""]
 def test_raise_mode_has_source_expression_and_typst_diagnostic(build_sphinx) -> None:  # type: ignore[no-untyped-def]
     result, _ = build_sphinx(
         {
-            "conf.py": """
-extensions = ["sphinx_typst_math"]
-html_math_renderer = "typst"
-typst_math_error_mode = "raise"
-""",
-            "index.rst": """Broken
-======
+            "conf.py": dedent(
+                """
+                extensions = ["sphinx_typst_math"]
+                html_math_renderer = "typst"
+                typst_math_error_mode = "raise"
+                """
+            ),
+            "index.rst": dedent(
+                """\
+                Broken
+                ======
 
-.. math::
+                .. math::
 
-   sqrt(
-""",
+                   sqrt(
+                """
+            ),
         }
     )
 
@@ -51,18 +60,23 @@ typst_math_error_mode = "raise"
 def test_warn_mode_renders_escaped_obvious_fallback(build_sphinx) -> None:  # type: ignore[no-untyped-def]
     result, output = build_sphinx(
         {
-            "conf.py": """
-extensions = ["sphinx_typst_math"]
-html_math_renderer = "typst"
-typst_math_error_mode = "warn"
-""",
-            "index.rst": """Broken
-======
+            "conf.py": dedent(
+                """
+                extensions = ["sphinx_typst_math"]
+                html_math_renderer = "typst"
+                typst_math_error_mode = "warn"
+                """
+            ),
+            "index.rst": dedent(
+                """\
+                Broken
+                ======
 
-.. math::
+                .. math::
 
-   sqrt(<unsafe>)
-""",
+                   sqrt(<unsafe>)
+                """
+            ),
         },
         warning_is_error=False,
     )

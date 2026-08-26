@@ -18,3 +18,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   for native Typst, `physica`, MiTeX, `quick-maths`, and Jupyter notebooks.
 - Add GitHub Pages deployment and parameterized Pixi tasks for building and serving
   the documentation locally.
+- Add Windows support to the Pixi development environment and run the test suite
+  on Ubuntu and Windows for Python 3.11 through 3.14.
+
+### Changed
+
+- Run Sphinx documentation builds through `python -m sphinx` for improved
+  cross-platform compatibility.
+- Make integration test fixtures portable across platforms, including an explicit
+  sphinx-immaterial cache location for isolated Windows environments.

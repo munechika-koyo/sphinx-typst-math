@@ -23,11 +23,12 @@ jobs:
       - name: 🧹 Execute lint
         run: pixi run lint
   test:
-    name: Test 🐍 ${{ matrix.environment }}
-    runs-on: ubuntu-latest
+    name: Test 🐍 ${{ matrix.environment }} (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
+        os: [ubuntu-latest, windows-latest]
         environment: ["py311", "py312", "py313", "py314"]
     steps:
       - name: Check out repo

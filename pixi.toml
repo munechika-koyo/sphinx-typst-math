@@ -1,6 +1,6 @@
 [workspace]
 channels = ["conda-forge"]
-platforms = ["osx-arm64", "linux-64"]
+platforms = ["osx-arm64", "linux-64", "win-64"]
 preview = ["pixi-build"]
 
 # -------------------------------
@@ -57,7 +57,9 @@ tombi = "*"
 test = { cmd = "pytest", description = "🧪 Run tests with pytest" }
 doc-build = {
   cmd = [
-    "sphinx-build",
+    "python",
+    "-m",
+    "sphinx",
     "-b",
     "{{ target }}",
     "-j",
