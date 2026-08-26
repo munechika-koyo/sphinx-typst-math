@@ -54,6 +54,37 @@ tombi = "*"
 [tasks]
 # Test task
 test = { cmd = "pytest", description = "🧪 Run tests with pytest" }
+doc-build = {
+  cmd = [
+    "sphinx-build",
+    "-b",
+    "{{ target }}",
+    "-j",
+    "auto",
+    ".",
+    "_build/{{ target }}",
+  ],
+  cwd = "docs",
+  args = [
+    { arg = "target", default = "html" },
+  ],
+  description = "📝 Build the docs",
+}
+doc-serve = {
+  cmd = [
+    "python",
+    "-m",
+    "http.server",
+    "{{ port }}",
+    "--directory",
+    "_build/html",
+  ],
+  cwd = "docs",
+  args = [
+    { arg = "port", default = "8000" },
+  ],
+  description = "🚀 Start a local server for the docs",
+}
 
 # Linting and formatting tasks
 lefthook = { cmd = "lefthook", description = "🔗 Run lefthook" }
