@@ -1,18 +1,22 @@
 from __future__ import annotations
 
 import json
+from textwrap import dedent
 
 import nbsphinx
 import pytest
 
-NOTEBOOK_MARKDOWN = """# Notebook
+NOTEBOOK_MARKDOWN = dedent(
+    """\
+    # Notebook
 
-Inline: $sum_(i=1)^n i$
+    Inline: $sum_(i=1)^n i$
 
-$$
-integral_0^1 x^2 dif x
-$$
-"""
+    $$
+    integral_0^1 x^2 dif x
+    $$
+    """
+)
 
 
 def test_nbsphinx_pandoc_conversion_preserves_literal_typst_source() -> None:
@@ -38,19 +42,24 @@ def test_notebook_markdown_math_is_native_mathml(build_sphinx) -> None:  # type:
     }
     result, output = build_sphinx(
         {
-            "conf.py": """
-extensions = ["nbsphinx", "sphinx_typst_math"]
-html_math_renderer = "typst"
-nbsphinx_execute = "never"
-exclude_patterns = ["**.ipynb_checkpoints"]
-""",
-            "index.rst": """Notebook test
-=============
+            "conf.py": dedent(
+                """
+                extensions = ["nbsphinx", "sphinx_typst_math"]
+                html_math_renderer = "typst"
+                nbsphinx_execute = "never"
+                exclude_patterns = ["**.ipynb_checkpoints"]
+                """
+            ),
+            "index.rst": dedent(
+                """\
+                Notebook test
+                =============
 
-.. toctree::
+                .. toctree::
 
-   notebook
-""",
+                   notebook
+                """
+            ),
             "notebook.ipynb": json.dumps(notebook),
         }
     )
