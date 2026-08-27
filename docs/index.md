@@ -122,7 +122,7 @@ The demonstration configuration defines an `expectation` helper in
 
 ```python
 typst_math_preamble = r"""
-#expectation(X) = integral_(-infinity)^infinity x f(x) dif x
+#let expectation(x) = $upright(E) lr([#x])$
 """
 ```
 
